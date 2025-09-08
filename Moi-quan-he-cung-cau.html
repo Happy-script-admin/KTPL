@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mối quan hệ cung – cầu — Trình bày ngắn gọn</title>
+  <style>
+    /* ---------- Reset cơ bản ---------- */
+    *,*::before,*::after{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;color:#0f1724}
+
+    /* ---------- Nền sóng 3 lớp (nhẹ, chuyên nghiệp) ---------- */
+    :root{
+      --bg1: #e7f2ef; /* nhạt xanh ngọc */
+      --bg2: #f3eefc; /* nhạt tím */
+      --bg3: #fff7ec; /* nhạt vàng kem */
+      --card-bg: rgba(255,255,255,0.75);
+      --muted: #334155;
+    }
+
+    body{
+      background: linear-gradient(180deg,var(--bg1) 0%, var(--bg2) 50%, var(--bg3) 100%);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      display:flex;align-items:center;justify-content:center;padding:40px;
+    }
+
+    .page-wrap{
+      width:100%;max-width:980px;background:var(--card-bg);backdrop-filter:blur(6px);border-radius:14px;box-shadow:0 10px 30px rgba(12,20,30,0.12);overflow:hidden;
+      position:relative;
+    }
+
+    /* Sóng trang trên cùng bằng SVG (tạo chuyển động cảm giác uyển chuyển) */
+    .hero-wave{position:relative;height:160px;background:transparent}
+    .hero-wave svg{display:block;width:100%;height:100%}
+    .content{padding:28px 36px 36px}
+
+    h1{margin:0 0 8px;font-size:20px;color:#07102a}
+    .subtitle{margin:0 0 18px;color:var(--muted);font-size:14px}
+
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start}
+    @media (max-width:900px){.grid{grid-template-columns:1fr;}.hero-wave{height:120px}}
+
+    .card{background:transparent;padding:16px;border-radius:10px}
+
+    /* Box nội dung chính */
+    .explain{line-height:1.6;color:#0b1320}
+    .list{margin:10px 0 16px;padding-left:18px}
+    .list li{margin:6px 0}
+
+    /* Khung ảnh */
+    .image-frame{display:flex;align-items:center;justify-content:center;height:240px;border-radius:10px;border:2px dashed rgba(7,16,42,0.08);background:linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.12));overflow:hidden;position:relative}
+    .image-frame p{margin:0;padding:12px;color:var(--muted);text-align:center}
+    .image-frame img{max-width:100%;max-height:100%;object-fit:cover;display:block}
+
+    /* Thông tin nhỏ */
+    .meta{font-size:13px;color:var(--muted);margin-top:12px}
+    .chip{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(7,16,42,0.06);font-weight:600;font-size:13px;margin-right:8px}
+
+    /* Footer chữ ký */
+    footer{border-top:1px solid rgba(7,16,42,0.04);padding:18px 36px;background:transparent;display:flex;justify-content:space-between;align-items:center}
+    .signature{font-size:13px;color:#334155;font-weight:600}
+    .small-note{font-size:13px;color:var(--muted)}
+
+    /* Một vài điểm nhấn màu cho tiêu đề con */
+    .kv{display:inline-block;background:linear-gradient(90deg,#6ee7b7 0%,#c4b5fd 100%);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+
+    /* Tương phản cao cho in/chiếu slide */
+    @media (prefers-contrast:more){body{background:linear-gradient(180deg,var(--bg1),var(--bg2))}.page-wrap{box-shadow:none}}
+  </style>
+</head>
+<body>
+  <main class="page-wrap" role="main">
+    <div class="hero-wave" aria-hidden="true">
+      <!-- SVG sóng 3 lớp cho cảm giác lượn sóng nhẹ nhàng, màu nhạt nên chữ vẫn dễ đọc -->
+      <svg viewBox="0 0 1200 160" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0%" stop-color="#e8f7f1"/>
+            <stop offset="100%" stop-color="#f7eefc"/>
+          </linearGradient>
+          <linearGradient id="g2" x1="0" x2="1">
+            <stop offset="0%" stop-color="#f7eefc"/>
+            <stop offset="100%" stop-color="#fff6ea"/>
+          </linearGradient>
+        </defs>
+        <path d="M0,64 C180,110 360,10 600,54 C840,98 1020,26 1200,64 L1200 0 L0 0 Z" fill="url(#g1)" opacity="0.9"/>
+        <path d="M0,96 C200,40 420,150 660,96 C900,42 1060,130 1200,96 L1200 0 L0 0 Z" fill="url(#g2)" opacity="0.8"/>
+      </svg>
+    </div>
+
+    <section class="content">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:6px">
+        <div>
+          <h1>Mối quan hệ <span class="kv">Cung – Cầu</span> trong nền kinh tế</h1>
+          <p class="subtitle">Tóm tắt ngắn gọn, dễ hiểu — dùng để chèn vào slide trình bày</p>
+        </div>
+        <div style="text-align:right">
+          <div class="chip">Môn: Kinh Tế Pháp Luật</div>
+        </div>
+      </div>
+
+      <div class="grid">
+        <!-- Nội dung chính -->
+        <article class="card" aria-labelledby="title-1">
+          <h2 id="title-1" style="font-size:16px;margin-bottom:6px">1. Khái niệm cơ bản</h2>
+          <p class="explain">
+            <strong>Cung</strong>: lượng hàng hóa/dịch vụ mà người bán sẵn sàng bán ở một mức giá nhất định.<br>
+            <strong>Cầu</strong>: lượng hàng hóa/dịch vụ mà người mua sẵn sàng mua ở một mức giá nhất định.
+          </p>
+
+          <h2 style="font-size:16px;margin:10px 0 6px">2. Quan hệ cơ bản</h2>
+          <ul class="list">
+            <li>Khi <strong>giá tăng</strong> → <em>cầu giảm</em>, nhưng <em>cung tăng</em> (nhà bán muốn bán nhiều hơn).</li>
+            <li>Khi <strong>giá giảm</strong> → <em>cầu tăng</em>, nhưng <em>cung giảm</em> (nhà bán bớt động lực bán).</li>
+            <li><strong>Điểm cân bằng</strong>: nơi đường cung và đường cầu cắt nhau — xác định <em>giá cân bằng</em> và <em>lượng cân bằng</em>.</li>
+          </ul>
+
+          <h2 style="font-size:16px;margin:10px 0 6px">3. Ý nghĩa thực tiễn (gợi ý để nói)</h2>
+          <ol class="list">
+            <li>Giúp thị trường điều chỉnh: giá gửi tín hiệu cho người bán và người mua.</li>
+            <li>Nhà nước can thiệp khi thị trường không đạt được kết quả công bằng hoặc ổn định (ví dụ: thuế, trợ cấp, giá trần/giá sàn).</li>
+            <li>Áp dụng trong nhiều lĩnh vực: nông sản, nhà ở, lao động, dịch vụ y tế... </li>
+          </ol>
+
+          <p class="meta">Gợi ý khi thuyết trình: nêu 1 ví dụ đơn giản (ví dụ: tăng giá xăng → giảm nhu cầu đi xe, tăng cung dầu thô làm giảm giá).</p>
+        </article>
+
+        <!-- Khung ảnh + chú thích -->
+        <aside class="card" aria-labelledby="title-2">
+          <h3 id="title-2" style="margin:0 0 10px;font-size:15px">Ảnh minh họa & Ghi chú</h3>
+
+          <div class="image-frame" role="img" aria-label="Khung ảnh minh họa">
+            <!-- Người dùng thay bằng <img src="path/to/your-image.jpg" alt="Biểu đồ cung cầu"> -->
+            <p>Thêm ảnh biểu đồ: <br> (ví dụ: biểu đồ Supply & Demand).<br> Tải ảnh lên GitHub rồi đổi src ở đây.</p>
+          </div>
+
+          <p class="meta">Gợi ý ảnh: tìm "supply demand graph" hoặc "supply and demand curve". Dùng ảnh sạch, độ phân giải vừa phải để slide không nặng.</p>
+
+          <p style="margin-top:12px;font-size:13px;color:var(--muted)">Mẹo: để chèn vào GitHub Pages, đặt file ảnh cùng folder với file .html và sửa thẻ &lt;img src&gt; tương ứng.</p>
+        </aside>
+      </div>
+    </section>
+
+    <footer>
+      <div class="small-note">Trang này: Mô tả ngắn, rõ ràng để chèn vào slide.</div>
+      <div class="signature">make by Trần Hải Đăng</div>
+    </footer>
+  </main>
+</body>
+</html>

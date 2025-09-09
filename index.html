@@ -119,6 +119,61 @@
       -webkit-background-clip:text;background-clip:text;
       color:transparent;font-weight:700
     }
+
+    /* Popup chung */
+    .popup-overlay{
+      position:fixed;
+      top:0;left:0;right:0;bottom:0;
+      background:rgba(0,0,0,0.6);
+      display:none;
+      align-items:center;
+      justify-content:center;
+      z-index:999;
+    }
+    .popup{
+      background:#1e293b;
+      padding:20px;
+      border-radius:12px;
+      text-align:center;
+      max-width:300px;
+      width:90%;
+      box-shadow:0 8px 20px rgba(0,0,0,0.5);
+      animation:fadeIn 0.3s ease;
+    }
+    .popup p{margin-bottom:15px;font-size:15px;color:#f1f5f9}
+    .popup button{
+      padding:6px 14px;
+      margin:0 6px;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:14px;
+      transition:0.3s;
+    }
+    .popup .yes{background:#22c55e;color:#fff}
+    .popup .yes:hover{background:#16a34a}
+    .popup .no{background:#ef4444;color:#fff}
+    .popup .no:hover{background:#dc2626}
+
+    /* Toast thông báo nhỏ */
+    .toast{
+      position:fixed;
+      bottom:20px;
+      right:20px;
+      background:#3b82f6;
+      color:#fff;
+      padding:10px 16px;
+      border-radius:8px;
+      box-shadow:0 4px 10px rgba(0,0,0,0.3);
+      opacity:0;
+      transform:translateY(20px);
+      transition:all 0.3s ease;
+      z-index:1000;
+    }
+    .toast.show{
+      opacity:1;
+      transform:translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -155,7 +210,7 @@
 
         <aside class="card">
           <h3>Ảnh minh họa Cung và Cầu</h3>
-          <div class="image-frame" onclick="downloadImage()">
+          <div class="image-frame" onclick="openPopup()">
             <img src="KTPL.png" alt="Minh họa mối quan hệ Cung với Cầu">
           </div>
         </aside>
@@ -167,21 +222,44 @@
     </footer>
   </main>
 
+  <!-- Popup tải ảnh -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup">
+      <p>Bạn có muốn tải ảnh về máy không?</p>
+      <button class="yes" onclick="downloadImage()">Có</button>
+      <button class="no" onclick="closePopup()">Không</button>
+    </div>
+  </div>
+
+  <!-- Toast copy -->
+  <div class="toast" id="toast">✅ Đã copy nội dung!</div>
+
   <script>
     function copyText(id){
       const text = document.getElementById(id).innerText;
       navigator.clipboard.writeText(text).then(()=>{
-        alert("✅ Đã copy nội dung!");
+        showToast();
       });
     }
 
+    function showToast(){
+      const toast = document.getElementById("toast");
+      toast.classList.add("show");
+      setTimeout(()=>{ toast.classList.remove("show"); },2000);
+    }
+
+    function openPopup(){
+      document.getElementById("popup").style.display="flex";
+    }
+    function closePopup(){
+      document.getElementById("popup").style.display="none";
+    }
     function downloadImage(){
-      if(confirm("Bạn có muốn tải ảnh về máy không ?")){
-        const link = document.createElement("a");
-        link.href = "KTPL.png";  // thay bằng link ảnh thực tế
-        link.download = "CungCau.png";
-        link.click();
-      }
+      const link = document.createElement("a");
+      link.href = "KTPL.png";  
+      link.download = "CungCau.png";
+      link.click();
+      closePopup();
     }
   </script>
 </body>

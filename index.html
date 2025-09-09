@@ -5,85 +5,112 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Mối quan hệ của Cung và Cầu</title>
   <style>
-    *,*::before,*::after{box-sizing:border-box}
-    html,body{height:100%}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     body{
-      margin:0;
       font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
       color:#f9fafb;
-      background: linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#334155 100%);
+      min-height:100vh;
       display:flex;
-      align-items:center;
       justify-content:center;
-      padding:20px;
+      background:#0f172a;
+      overflow-x:hidden;
+    }
+
+    /* Nền động */
+    body::before{
+      content:"";
+      position:fixed;
+      top:0;left:0;right:0;bottom:0;
+      background:linear-gradient(120deg,#0f172a,#1e293b,#334155);
+      background-size:400% 400%;
+      animation:gradientMove 15s ease infinite;
+      z-index:-1;
+    }
+    @keyframes gradientMove{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
     }
 
     .page-wrap{
       width:100%;
-      max-width:950px;
+      max-width:960px;
+      margin:20px;
       background:rgba(255,255,255,0.05);
       backdrop-filter:blur(10px);
-      border-radius:16px;
+      border-radius:20px;
       box-shadow:0 8px 25px rgba(0,0,0,0.5);
       overflow:hidden;
+      animation:fadeIn 1s ease;
+    }
+    @keyframes fadeIn{
+      from{opacity:0;transform:translateY(20px)}
+      to{opacity:1;transform:translateY(0)}
     }
 
-    .hero-wave{height:100px}
-    .hero-wave svg{width:100%;height:100%}
+    .content{padding:20px}
+    h1{margin-bottom:10px;font-size:22px;color:#f8fafc;text-align:center}
+    .subtitle{text-align:center;margin-bottom:20px;color:#cbd5e1;font-size:14px}
 
-    .content{padding:20px 24px}
-    h1{margin:0 0 10px;font-size:24px;color:#f8fafc}
-    .subtitle{margin:0 0 20px;color:#cbd5e1;font-size:15px}
+    .grid{display:grid;gap:20px}
+    @media(min-width:769px){.grid{grid-template-columns:1fr 1fr}}
 
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-    @media (max-width:768px){.grid{grid-template-columns:1fr}}
-    .card{padding:12px;border-radius:10px}
-    .explain{line-height:1.7;color:#f1f5f9;font-size:17px}
-    .list{margin:10px 0 16px;padding-left:18px;font-size:16px}
+    .card{
+      padding:16px;
+      border-radius:12px;
+      background:rgba(255,255,255,0.03);
+      box-shadow:inset 0 0 10px rgba(255,255,255,0.05);
+    }
+    .card h2{margin:10px 0;color:#93c5fd}
+    .card h3{margin-bottom:8px;color:#93c5fd}
+    .explain{line-height:1.7;color:#f1f5f9;font-size:16px}
+    .list{margin:10px 0 16px;padding-left:20px;font-size:15px}
     .list li{margin:6px 0}
 
     .copy-btn{
       display:inline-block;
-      margin-top:8px;
-      padding:6px 10px;
+      margin:6px 0 12px;
+      padding:6px 12px;
       font-size:13px;
       color:#fff;
       background:#3b82f6;
       border:none;
       border-radius:6px;
       cursor:pointer;
-      transition:0.2s;
+      transition:0.3s;
     }
-    .copy-btn:hover{background:#2563eb}
+    .copy-btn:hover{background:#2563eb;transform:scale(1.05)}
 
     .image-frame{
       display:flex;
       align-items:center;
       justify-content:center;
-      height:220px;
+      height:240px;
       border-radius:20px;
       border:2px dashed rgba(255,255,255,0.2);
       background:rgba(255,255,255,0.05);
       overflow:hidden;
       cursor:pointer;
+      position:relative;
     }
 
     .image-frame img{
-      width:120%;
-      height:auto;  
-      max-width:none;
-      max-height:100%;
+      width:110%;
+      height:auto;
       border-radius:20px;
       object-fit:cover;
-      transition:0.3s;
+      animation:float 6s ease-in-out infinite;
     }
-    .image-frame img:hover{transform:scale(1.05)}
+    @keyframes float{
+      0%,100%{transform:translateY(0)}
+      50%{transform:translateY(-10px)}
+    }
 
     footer{
       border-top:1px solid rgba(255,255,255,0.1);
       padding:14px;
       text-align:center;
-      background:rgba(0,0,0,0.25)
+      background:rgba(0,0,0,0.2);
     }
     .signature{font-size:14px;color:#cbd5e1;font-weight:600}
 
@@ -96,13 +123,6 @@
 </head>
 <body>
   <main class="page-wrap">
-    <div class="hero-wave">
-      <svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,40 C300,100 900,0 1200,60 L1200 0 L0 0 Z" fill="#1e293b"/>
-        <path d="M0,60 C400,120 800,20 1200,80 L1200 0 L0 0 Z" fill="#334155" opacity="0.8"/>
-      </svg>
-    </div>
-
     <section class="content">
       <h1>Mối quan hệ <span class="kv">Cung – Cầu</span> trong nền kinh tế</h1>
       <p class="subtitle">Nếu Danh ko hiểu thì cứ hỏi Đăng nhe 👍</p>
@@ -158,7 +178,7 @@
     function downloadImage(){
       if(confirm("Bạn có muốn tải ảnh về máy không ?")){
         const link = document.createElement("a");
-        link.href = "KTPL.png";  // thay bằng link ảnh thực tế của bạn
+        link.href = "KTPL.png";  // thay bằng link ảnh thực tế
         link.download = "CungCau.png";
         link.click();
       }

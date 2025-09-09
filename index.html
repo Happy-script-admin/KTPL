@@ -11,7 +11,7 @@
       margin:0;
       font-family:"Inter", system-ui, -apple-system, "Segoe UI", Roboto, Arial;
       color:#f9fafb;
-      background: linear-gradient(180deg,#1e293b 0%,#334155 50%,#0f172a 100%);
+      background: linear-gradient(135deg,#0f172a 0%,#1e293b 50%,#334155 100%);
       display:flex;
       align-items:center;
       justify-content:center;
@@ -20,11 +20,11 @@
 
     .page-wrap{
       width:100%;
-      max-width:900px;
-      background:rgba(255,255,255,0.06);
-      backdrop-filter:blur(8px);
+      max-width:950px;
+      background:rgba(255,255,255,0.05);
+      backdrop-filter:blur(10px);
       border-radius:16px;
-      box-shadow:0 8px 20px rgba(0,0,0,0.4);
+      box-shadow:0 8px 25px rgba(0,0,0,0.5);
       overflow:hidden;
     }
 
@@ -32,7 +32,7 @@
     .hero-wave svg{width:100%;height:100%}
 
     .content{padding:20px 24px}
-    h1{margin:0 0 10px;font-size:22px;color:#f8fafc}
+    h1{margin:0 0 10px;font-size:24px;color:#f8fafc}
     .subtitle{margin:0 0 20px;color:#cbd5e1;font-size:15px}
 
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
@@ -42,33 +42,48 @@
     .list{margin:10px 0 16px;padding-left:18px;font-size:16px}
     .list li{margin:6px 0}
 
+    .copy-btn{
+      display:inline-block;
+      margin-top:8px;
+      padding:6px 10px;
+      font-size:13px;
+      color:#fff;
+      background:#3b82f6;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      transition:0.2s;
+    }
+    .copy-btn:hover{background:#2563eb}
+
     .image-frame{
       display:flex;
-       align-items:center;
+      align-items:center;
       justify-content:center;
       height:220px;
-      border-radius:20px; /* bo tròn nhiều hơn */
+      border-radius:20px;
       border:2px dashed rgba(255,255,255,0.2);
       background:rgba(255,255,255,0.05);
       overflow:hidden;
+      cursor:pointer;
     }
 
     .image-frame img{
-      width:120%;         /* kéo dài ảnh ngang ra */
+      width:120%;
       height:auto;  
-      max-width:none;     /* bỏ giới hạn max */
-      max-height:100%;    /* vẫn đảm bảo không tràn dọc */
-      border-radius:20px; /* bo tròn góc */
+      max-width:none;
+      max-height:100%;
+      border-radius:20px;
       object-fit:cover;
+      transition:0.3s;
     }
-    
-    .image-frame p{margin:0;padding:10px;color:#94a3b8;text-align:center;font-size:14px}
+    .image-frame img:hover{transform:scale(1.05)}
 
     footer{
       border-top:1px solid rgba(255,255,255,0.1);
       padding:14px;
       text-align:center;
-      background:rgba(0,0,0,0.2)
+      background:rgba(0,0,0,0.25)
     }
     .signature{font-size:14px;color:#cbd5e1;font-weight:600}
 
@@ -95,29 +110,32 @@
       <div class="grid">
         <article class="card">
           <h2>1. Khái niệm</h2>
-          <p class="explain">
+          <p class="explain" id="section1">
             <strong>Cung</strong>: lượng hàng hóa/dịch vụ mà người bán sẵn sàng bán ở một mức giá nhất định.<br>
             <strong>Cầu</strong>: lượng hàng hóa/dịch vụ mà người mua sẵn sàng mua ở một mức giá nhất định.
           </p>
+          <button class="copy-btn" onclick="copyText('section1')">📋 Copy</button>
 
           <h2>2. Quan hệ cơ bản</h2>
-          <ul class="list">
+          <ul class="list" id="section2">
             <li>Khi <strong>giá tăng</strong> → <em>cầu giảm</em>, còn <em>cung sẽ tăng</em>.</li>
             <li>Khi <strong>giá giảm</strong> → <em>cầu tăng</em>, còn <em>cung sẽ giảm</em>.</li>
             <li><strong>Điểm cân bằng</strong>: nơi cung và cầu cắt nhau.</li>
           </ul>
+          <button class="copy-btn" onclick="copyText('section2')">📋 Copy</button>
 
           <h2>3. Ý nghĩa</h2>
-          <ol class="list">
+          <ol class="list" id="section3">
             <li>Giúp thị trường tự điều chỉnh qua giá hợp lí.</li>
             <li>Nhà nước sẽ can thiệp khi cần công bằng & ổn định.</li>
             <li>Ứng dụng trong nhiều lĩnh vực: nông sản, nhà ở, lao động...</li>
           </ol>
+          <button class="copy-btn" onclick="copyText('section3')">📋 Copy</button>
         </article>
 
         <aside class="card">
           <h3>Ảnh minh họa Cung và Cầu</h3>
-          <div class="image-frame">
+          <div class="image-frame" onclick="downloadImage()">
             <img src="KTPL.png" alt="Minh họa mối quan hệ Cung với Cầu">
           </div>
         </aside>
@@ -128,5 +146,23 @@
       <div class="signature">make by Trần Hải Đăng</div>
     </footer>
   </main>
+
+  <script>
+    function copyText(id){
+      const text = document.getElementById(id).innerText;
+      navigator.clipboard.writeText(text).then(()=>{
+        alert("✅ Đã copy nội dung!");
+      });
+    }
+
+    function downloadImage(){
+      if(confirm("Bạn có muốn tải ảnh về máy không ?")){
+        const link = document.createElement("a");
+        link.href = "KTPL.png";  // thay bằng link ảnh thực tế của bạn
+        link.download = "CungCau.png";
+        link.click();
+      }
+    }
+  </script>
 </body>
 </html>
